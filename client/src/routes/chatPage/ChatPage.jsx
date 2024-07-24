@@ -17,7 +17,7 @@ const ChatPage = () => {
       }).then((res) => res.json()),
   });
 
-  console.log(data);
+  // console.log(data);
 
   return (
     <div className="chatPage">
@@ -28,18 +28,26 @@ const ChatPage = () => {
             : error
             ? "Something went wrong!"
             : data?.history?.map((message, i) => (
-                <>
+                <div key={i}>
                   {message.img && (
-                    <IKImage
-                      urlEndpoint={import.meta.env.VITE_IMAGE_KIT_ENDPOINT}
-                      path={message.img}
-                      height="300"
-                      width="400"
-                      transformation={[{ height: 300, width: 400 }]}
-                      loading="lazy"
-                      lqip={{ active: true, quality: 20 }}
-                    />
+                    <div
+                      className={
+                        message.role === "user" ? "image user" : "image"
+                      }
+                    >
+                      <IKImage
+                        key={i}
+                        urlEndpoint={import.meta.env.VITE_IMAGE_KIT_ENDPOINT}
+                        path={message.img}
+                        height="300"
+                        width="400"
+                        transformation={[{ height: 300, width: 400 }]}
+                        loading="lazy"
+                        lqip={{ active: true, quality: 20 }}
+                      />
+                    </div>
                   )}
+
                   <div
                     className={
                       message.role === "user" ? "message user" : "message"
@@ -48,10 +56,10 @@ const ChatPage = () => {
                   >
                     <Markdown>{message.parts[0].text}</Markdown>
                   </div>
-                </>
+                </div>
               ))}
 
-          {data && <NewPrompt data={data}/>}
+          {data && <NewPrompt data={data} />}
         </div>
       </div>
     </div>
