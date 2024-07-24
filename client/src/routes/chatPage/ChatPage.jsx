@@ -35,7 +35,7 @@ const ChatPage = () => {
                         message.role === "user" ? "image user" : "image"
                       }
                     >
-                      <IKImage
+                      {/* <IKImage
                         key={i}
                         urlEndpoint={import.meta.env.VITE_IMAGE_KIT_ENDPOINT}
                         path={message.img}
@@ -44,6 +44,15 @@ const ChatPage = () => {
                         transformation={[{ height: 300, width: 400 }]}
                         loading="lazy"
                         lqip={{ active: true, quality: 20 }}
+                      /> */}
+                      <img
+                        src={
+                          import.meta.env.VITE_IMAGE_KIT_ENDPOINT + message.img
+                        }
+                        width={300}
+                        height={400}
+                        loading="lazy"
+                        alt=""
                       />
                     </div>
                   )}
